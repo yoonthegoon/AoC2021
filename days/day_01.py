@@ -11,7 +11,7 @@ depths = [int(i) for i in r.text.split('\n')[:-1]]
 
 
 def measurements(lst: list) -> list:
-    return ['increased' if lst[i] - lst[i - 1] > 0 else 'decreased' for i in range(1, len(lst))]
+    return ['increased' if lst[i] > lst[i - 1] else 'decreased' for i in range(1, len(lst))]
 
 
 def part1():
