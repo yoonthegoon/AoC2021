@@ -3,8 +3,7 @@
 import requests
 
 cookie = open('.config', 'r').read()
-s = requests.session()
-r = s.get('https://adventofcode.com/2021/day/1/input', cookies=dict(session=cookie))
+r = requests.get('https://adventofcode.com/2021/day/1/input', cookies=dict(session=cookie))
 
 depths = [int(i) for i in r.text.split('\n')[:-1]]
 
