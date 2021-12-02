@@ -1,9 +1,8 @@
 # https://adventofcode.com/2021/day/1
 
-import os
 import requests
 
-cookie = os.getenv('COOKIE')
+cookie = open('.config', 'r').read()
 s = requests.session()
 r = s.get('https://adventofcode.com/2021/day/1/input', cookies=dict(session=cookie))
 
