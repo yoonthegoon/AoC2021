@@ -13,14 +13,14 @@ boards = bingo[1:]
 
 class BingoBoard:
     def __init__(self, string):
-        board, called = dict(), dict()
+        uncalled, called = dict(), dict()
 
         for i, num in enumerate('12345'):
             for j, let in enumerate('abcde'):
-                board[f'{let}{num}'] = int(string.split('\n')[i][3*j:3*j+2])
+                uncalled[f'{let}{num}'] = int(string.split('\n')[i][3*j:3*j+2])
                 called[f'{let}{num}'] = None
 
-        self.board, self.called = board, called
+        self.board, self.called = uncalled, called
         self.board_sum = 0
         self.win, self.won = False, False
 
