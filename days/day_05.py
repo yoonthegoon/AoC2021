@@ -74,8 +74,8 @@ def part1():
         vent = Vent(line)
         field.draw(vent)
 
-    for f in field.field:
-        print(''.join(str(i if i else '.') for i in f))
+    # for f in field.field:  # just prints the rep for ez debugging
+    #     print(''.join(str(i if i else '.') for i in f))
 
     return field.overlaps()
 
