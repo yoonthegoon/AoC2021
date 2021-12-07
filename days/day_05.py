@@ -3,21 +3,9 @@
 import requests
 
 cookie = open('.config', 'r').read()
-# r = requests.get('https://adventofcode.com/2021/day/5/input', cookies=dict(session=cookie))
-#
-# lines = r.text.split('\n')[:-1]
-lines = [
-    '0,9 -> 5,9',
-    '8,0 -> 0,8',
-    '9,4 -> 3,4',
-    '2,2 -> 2,1',
-    '7,0 -> 7,4',
-    '6,4 -> 2,0',
-    '0,9 -> 2,9',
-    '3,4 -> 1,4',
-    '0,0 -> 8,8',
-    '5,5 -> 8,2'
-]
+r = requests.get('https://adventofcode.com/2021/day/5/input', cookies=dict(session=cookie))
+
+lines = r.text.split('\n')[:-1]
 
 
 class Vent:
@@ -37,7 +25,7 @@ class Vent:
 
 class Field:
     def __init__(self):
-        self.field = [10*[0, ] for _ in range(10)]
+        self.field = [1000*[0, ] for _ in range(1000)]
 
     def draw(self, vent: Vent):
         if vent.orientation() == 'vertical':
@@ -60,11 +48,11 @@ class Field:
                     for x, y in zip(range(vent.x1, vent.x2 + 1), range(vent.y1, vent.y2 + 1)):
                         self.field[y][x] += 1
                 else:
-                    for x, y in zip(range(vent.x2, vent.x1 + 1), range(vent.y1, vent.y2 + 1)):
+                    for x, y in zip(reversed(range(vent.x2, vent.x1 + 1)), range(vent.y1, vent.y2 + 1)):
                         self.field[y][x] += 1
             else:
                 if vent.x2 > vent.x1:
-                    for x, y in zip(range(vent.x1, vent.x2 + 1), range(vent.y2, vent.y1 + 1)):
+                    for x, y in zip(range(vent.x1, vent.x2 + 1), reversed(range(vent.y2, vent.y1 + 1))):
                         self.field[y][x] += 1
                 else:
                     for x, y in zip(range(vent.x2, vent.x1 + 1), range(vent.y2, vent.y1 + 1)):
@@ -86,8 +74,8 @@ def part1():
         vent = Vent(line)
         field.draw(vent)
 
-    for f in field.field:
-        print(''.join(str(i if i else '.') for i in f))
+    # for f in field.field:  # just prints the rep for ez debugging
+    #     print(''.join(str(i if i else '.') for i in f))
 
     return field.overlaps()
 
